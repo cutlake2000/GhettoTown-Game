@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputController : MonoBehaviour
+public class PlayerInputController : TopDownCharacterController
 {
     private Camera _camera;
 
     private void Awake()
     {
-        Debug.Log("Tese");
         _camera = Camera.main;
     }
 
