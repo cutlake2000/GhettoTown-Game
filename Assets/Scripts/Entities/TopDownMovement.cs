@@ -1,19 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Scripting.APIUpdating;
 
 public class TopDownMovement : MonoBehaviour
 {
     private TopDownCharacterController topDownCharacterController;
     private new Rigidbody2D rigidbody2D;
+    private Animator animator;
     private Vector2 movementDirection = Vector2.zero;
 
     private void Awake()
     {
+        animator = GetComponentInChildren<Animator>();
         topDownCharacterController = GetComponent<TopDownCharacterController>();
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
@@ -31,6 +27,22 @@ public class TopDownMovement : MonoBehaviour
     private void Move(Vector2 direction)
     {
         movementDirection = direction;
+
+        SetWalkingAnimation(direction);
+    }
+
+    private void SetWalkingAnimation(Vector2 direction)
+    {
+        if (direction != Vector2.zero)
+        {
+            animator.ResetTrigger("Stop");
+            animator.SetTrigger("Move");
+        }
+        else
+        {
+            animator.ResetTrigger("Move");
+            animator.SetTrigger("Stop");
+        }
     }
 
     private void ApplyMovement(Vector2 direction)
