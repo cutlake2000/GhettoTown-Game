@@ -13,6 +13,7 @@ public class TopDownAimRotation : MonoBehaviour
     private SpriteRenderer characterRenderer;
     private Animator animator;
     private TopDownCharacterController topDownCharacterController;
+    private int direction;
 
     private void Awake()
     {
@@ -43,40 +44,42 @@ public class TopDownAimRotation : MonoBehaviour
 
     void GetAimDirectionToFloat(float rotZ)
     {
-        int aimDirection = animator.GetInteger("direction");
-
         // 정면
         if (-135 < rotZ && rotZ <= -45)
         {
-            if (aimDirection != 0)
+            if (direction != 0)
             {
-                animator.SetInteger("direction", 0);
-            }
-        }
-        // 오른쪽
-        else if (-45 < rotZ && rotZ <= 45)
-        {
-            if (aimDirection != 1)
-            {
-                animator.SetInteger("direction", 1);
-                characterRenderer.flipX = true;
+                animator.SetTrigger("Direction 0");
+                direction = 0;
             }
         }
         // 왼쪽
         else if (135 <= Mathf.Abs(rotZ) && Mathf.Abs(rotZ) <= 180)
         {
-            if (aimDirection != 1)
+            if (direction != -1)
             {
-                animator.SetInteger("direction", 1);
+                animator.SetTrigger("Direction 1");
                 characterRenderer.flipX = false;
+                direction = -1;
+            }
+        }
+        // 오른쪽
+        else if (-45 < rotZ && rotZ <= 45)
+        {
+            if (direction != 1)
+            {
+                animator.SetTrigger("Direction 1");
+                characterRenderer.flipX = true;
+                direction = 1;
             }
         }
         // 뒷면
         else if (45 < rotZ && rotZ <= 135)
         {
-            if (aimDirection != 2)
+            if (direction != 2)
             {
-                animator.SetInteger("direction", 2);
+                animator.SetTrigger("Direction 2");
+                direction = 2;
             }
         }
     }

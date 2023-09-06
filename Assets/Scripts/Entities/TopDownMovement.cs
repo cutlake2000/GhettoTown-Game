@@ -33,15 +33,13 @@ public class TopDownMovement : MonoBehaviour
 
     private void SetWalkingAnimation(Vector2 direction)
     {
-        if (direction != Vector2.zero)
+        if (direction == Vector2.zero)
         {
-            animator.ResetTrigger("Stop");
-            animator.SetTrigger("Move");
+            animator.SetBool("isWalking", false);
         }
         else
         {
-            animator.ResetTrigger("Move");
-            animator.SetTrigger("Stop");
+            animator.SetBool("isWalking", true);
         }
     }
 
