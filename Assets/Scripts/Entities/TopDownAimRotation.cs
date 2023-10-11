@@ -3,14 +3,9 @@ using UnityEngine;
 
 public class TopDownAimRotation : MonoBehaviour
 {
-    // [SerializeField]
-    // private SpriteRenderer armRenderer;
-
-    // [SerializeField]
-    // private Transform armPivot;
-
     [SerializeField]
     private SpriteRenderer characterRenderer;
+
     private Animator animator;
     private TopDownCharacterController topDownCharacterController;
     private int direction;
@@ -36,15 +31,11 @@ public class TopDownAimRotation : MonoBehaviour
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         GetAimDirectionToFloat(rotZ);
-
-        // armRenderer.flipX = Mathf.Abs(rotZ) < 90f;
-        // characterRenderer.flipX = armRenderer.flipY;
-        // armPivot.rotation = Quaternion.Euler(0, 0, rotZ);
     }
 
     void GetAimDirectionToFloat(float rotZ)
     {
-        // 정면
+        // 앞쪽
         if (-135 < rotZ && rotZ <= -45)
         {
             if (direction != 0)
@@ -73,7 +64,7 @@ public class TopDownAimRotation : MonoBehaviour
                 direction = 1;
             }
         }
-        // 뒷면
+        // 뒷쪽
         else if (45 < rotZ && rotZ <= 135)
         {
             if (direction != 2)

@@ -12,7 +12,6 @@ public class PlayerInputController : TopDownCharacterController
 
     public void OnMove(InputValue value)
     {
-        Debug.Log("OnMove" + value);
         Vector2 moveInput = value.Get<Vector2>().normalized;
         CallMoveEvent(moveInput);
     }
@@ -29,8 +28,5 @@ public class PlayerInputController : TopDownCharacterController
         }
     }
 
-    public void OnFire(InputValue value)
-    {
-        Debug.Log("OnFire" + value.ToString());
-    }
+    public void OnFire(InputValue value) { }
 }
