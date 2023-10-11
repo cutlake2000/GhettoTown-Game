@@ -6,8 +6,12 @@ public class TopDownAimRotation : MonoBehaviour
     [SerializeField]
     private SpriteRenderer characterRenderer;
 
+    [SerializeField]
+    private Transform armPivot;
+
     private Animator animator;
     private TopDownCharacterController topDownCharacterController;
+
     private int direction;
 
     private void Awake()
@@ -23,6 +27,7 @@ public class TopDownAimRotation : MonoBehaviour
 
     public void OnAim(Vector2 newAimDirection)
     {
+        RotateArm(newAimDirection);
         SetLookingAnimation(newAimDirection);
     }
 
@@ -31,6 +36,13 @@ public class TopDownAimRotation : MonoBehaviour
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         GetAimDirectionToFloat(rotZ);
+    }
+
+    private void RotateArm(Vector2 direction)
+    {
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        armPivot.rotation = Quaternion.Euler(0, 0, rotZ);
     }
 
     void GetAimDirectionToFloat(float rotZ)

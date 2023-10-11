@@ -12,32 +12,36 @@ public class TopDownCharacterController : MonoBehaviour
 
     protected CharacterStatsHandler Stats { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Stats = GetComponent<CharacterStatsHandler>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         HandleAttackDelay();
     }
 
     private void HandleAttackDelay()
     {
-        if (Stats.currentStats.attackSO == null)
+        Debug.Log("attackSO " + Stats.CurrentStats.attackSO);
+
+        if (Stats.CurrentStats.attackSO == null)
         {
             return;
         }
 
-        if (timeSinceLastAttack <= Stats.currentStats.attackSO.delay)
+        Debug.Log("delay " + Stats.CurrentStats.attackSO.delay);
+
+        if (timeSinceLastAttack <= Stats.CurrentStats.attackSO.delay)
         {
             timeSinceLastAttack += Time.deltaTime;
         }
 
-        if (IsAttacking && timeSinceLastAttack > Stats.currentStats.attackSO.delay)
+        if (IsAttacking && timeSinceLastAttack > Stats.CurrentStats.attackSO.delay)
         {
             timeSinceLastAttack = 0;
-            CallAttackEvent(Stats.currentStats.attackSO);
+            CallAttackEvent(Stats.CurrentStats.attackSO);
         }
     }
 

@@ -44,6 +44,20 @@ public class RangedAttackController : MonoBehaviour
         _rigidbody.velocity = _direction * _attackData.speed;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (
+            levelCollisionLayer.value
+            == (levelCollisionLayer.value | (1 << collision.gameObject.layer))
+        )
+        {
+            DestroyProjectile(
+                collision.ClosestPoint(transform.position) - _direction * .2f,
+                fxOnDestroy
+            );
+        }
+    }
+
     public void InitializeAttack(
         Vector2 direction,
         RangedAttackData attackData,
@@ -70,7 +84,6 @@ public class RangedAttackController : MonoBehaviour
 
     private void DestroyProjectile(Vector3 position, bool createFx)
     {
-        if (createFx) { }
         gameObject.SetActive(false);
     }
 }

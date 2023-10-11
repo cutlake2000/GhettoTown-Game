@@ -8,8 +8,8 @@ public class CharacterStatsHandler : MonoBehaviour
     [SerializeField]
     private CharacterStats baseStats;
 
-    public CharacterStats currentStats { get; private set; }
-    public List<CharacterStats> statsModifiers = new List<CharacterStats>();
+    public CharacterStats CurrentStats { get; private set; }
+    public List<CharacterStats> statsModifiers = new();
 
     private void Awake()
     {
@@ -25,6 +25,6 @@ public class CharacterStatsHandler : MonoBehaviour
             attackSO = Instantiate(baseStats.attackSO);
         }
 
-        currentStats = new CharacterStats { attackSO = attackSO };
+        CurrentStats = new CharacterStats { attackSO = attackSO };
     }
 }
