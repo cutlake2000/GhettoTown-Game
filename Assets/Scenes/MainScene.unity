@@ -4208,6 +4208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterRenderer: {fileID: 302184675}
+  armPivot: {fileID: 430115890}
 --- !u!114 &1210659982
 MonoBehaviour:
   m_ObjectHideFlags: 0
